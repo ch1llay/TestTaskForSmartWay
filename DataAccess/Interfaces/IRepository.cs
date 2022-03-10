@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Classes
+namespace DataAccess.Interfaces
 {
-    internal class DataContext
+    internal interface IRepository
     {
+
     }
 }
