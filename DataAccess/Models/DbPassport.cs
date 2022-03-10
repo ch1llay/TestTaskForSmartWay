@@ -8,7 +8,7 @@ namespace DataAccess.Models
 {
     internal class DbPassport
     {
-        string Type { get; set; }
-        string Number { get; set; }
+        public string Type { get; set; }
+        public string Number { get; set; }
     }
 }
