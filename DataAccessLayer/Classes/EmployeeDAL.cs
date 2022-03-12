@@ -34,9 +34,9 @@ namespace DataAccessLayer.Classes
             {
                 var getAllTabels = "SELECT table_schema || '.' || table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema NOT IN ('pg_catalog', 'information_schema');";
                 var s = connection.Query(getAllTabels).ToList();
-                var sqlQueryPassport = @"INSERT INTO public."Passports" ("Type", "Number", "Id") VALUES ('1234', '1234', DEFAULT)" ;
-                connection.Execute(sqlQueryPassport);
-                int passportId = connection.Query<int>("Select")
+                string quote = "\"";
+                var sqlQueryAddPassport = $"INSERT INTO public.\"Passports\" (\"Type\", \"Number\", \"Id\") VALUES('{passport.Type}', '{passport.Number}', DEFAULT)  RETURNING \"Id\"";
+                int passportId = connection.Query<int>(sqlQueryAddPassport).FirstOrDefault();
                 return passportId;
             }
             
@@ -46,7 +46,7 @@ namespace DataAccessLayer.Classes
             using (var connection = DBConnection.CreateConnection())
             {
 
-                var sqlQuery = "INSERT INTO Employees (Name, Surname, PassportId) VALUES(@Name, @Surname, @PassportId); SELECT CAST(SCOPE_IDENTITY() as int";
+                var sqlQuery = $"INSERT INTO public.\"Employees\" (\"Name\", \"Surname\", \"PassportId\") VALUES('{employee.Name}', '{employee.Surname}', '{employee.PassportId}') RETURNING \"Id\"";
                 int userId = connection.Query<int>(sqlQuery, employee).FirstOrDefault();
                 return userId;
             }
