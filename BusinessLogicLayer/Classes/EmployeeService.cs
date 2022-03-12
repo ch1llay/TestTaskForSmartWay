@@ -11,7 +11,7 @@ namespace BusinessLogicLayer.Classes
     public class EmployeeService : IEmployeeService
     {
         IEmployeeDAL _employeeDAL;
-        public EmployeeService(EmployeeDAL employeeDAL)
+        public EmployeeService(IEmployeeDAL employeeDAL)
         {
             _employeeDAL = employeeDAL;
         }

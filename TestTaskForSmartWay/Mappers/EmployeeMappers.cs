@@ -17,7 +17,6 @@ namespace TestTaskForSmartWay.Mappers
         {
             return new Employee
             {
-                Id = source.Id,
                 CompanyId = source.CompanyId,
                 DepartmentName = source.DepartmentName,
                 Name = source.Name,

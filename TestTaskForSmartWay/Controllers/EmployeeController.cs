@@ -5,6 +5,8 @@ using TestTaskForSmartWay.Mappers;
 
 namespace TestTaskForSmartWay.Controllers
 {
+    [ApiController]
+    [Produces("application/json")]
     public class EmployeeController : Controller
     {
         IEmployeeService _employeeService;
@@ -17,6 +19,7 @@ namespace TestTaskForSmartWay.Controllers
         {
             return Ok(id);
         }
+        [HttpPost]
         [Route("api/v1/employee/create")]
         public IActionResult Create([FromBody] RequestCreateEmployee employee)
         {

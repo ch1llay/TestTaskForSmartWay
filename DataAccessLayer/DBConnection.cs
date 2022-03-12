@@ -11,7 +11,7 @@ namespace DataAccessLayer
     {
         public static NpgsqlConnection CreateConnection()
         {
-            return new NpgsqlConnection("User ID = root; password = myPassword; host = localhost; port = 5432; database = MyDatabase; ");
+            return new NpgsqlConnection("User ID = postgres; password = password; host = localhost; port = 5432; database = TestTask; ");
         }
     }
 }

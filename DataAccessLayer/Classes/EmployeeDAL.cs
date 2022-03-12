@@ -17,6 +17,7 @@ namespace DataAccessLayer.Classes
             throw new NotImplementedException();
         }
 
+
         public ICollection<DbEmployee> GetAllByCompanyId(int companyId)
         {
             throw new NotImplementedException();
@@ -31,8 +32,11 @@ namespace DataAccessLayer.Classes
         {
             using (var connection = DBConnection.CreateConnection())
             {
-                var sqlQueryPassport = "INSERT INTO Passports (Type, Number) VALUES(@Name, @Number);SELECT CAST(SCOPE_IDENTITY() as int";
-                int passportId = connection.Query<int>(sqlQueryPassport, passport).FirstOrDefault();
+                var getAllTabels = "SELECT table_schema || '.' || table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema NOT IN ('pg_catalog', 'information_schema');";
+                var s = connection.Query(getAllTabels).ToList();
+                var sqlQueryPassport = @"INSERT INTO public."Passports" ("Type", "Number", "Id") VALUES ('1234', '1234', DEFAULT)" ;
+                connection.Execute(sqlQueryPassport);
+                int passportId = connection.Query<int>("Select")
                 return passportId;
             }
             
