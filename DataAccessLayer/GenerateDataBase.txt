@@ -1,0 +1,45 @@
+﻿create table "Departments"
+(
+    "Name"  text not null
+        constraint department_pk
+            primary key,
+    "Phone" text
+);
+
+alter table "Departments"
+    owner to postgres;
+
+create table "Passports"
+(
+    "Type"   text,
+    "Number" text    not null,
+    "Id"     integer not null
+        constraint passports_pk
+            primary key
+);
+
+alter table "Passports"
+    owner to postgres;
+
+create table "Employees"
+(
+    "Id"             integer not null
+        constraint employee_pk
+            primary key,
+    "Name"           varchar(50),
+    "Surname"        varchar(50),
+    "Phone"          varchar(30),
+    "CompanyId"      integer,
+    "DepartmentName" text
+        constraint employees_departments_name_fk
+            references "Departments",
+    "PassportId"     integer
+        constraint employees_passports_id_fk
+            references "Passports"
+);
+
+alter table "Employees"
+    owner to postgres;
+
+create unique index passports_id_uindex
+    on "Passports" ("Id");

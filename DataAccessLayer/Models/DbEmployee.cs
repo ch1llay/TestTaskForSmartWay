@@ -14,7 +14,7 @@ namespace DataAccessLayer.Models
         public string Surname { get; set; }
         public string Phone { get; set; }
         public int CompanyId { get; set; }
-        public string DepartamentName { get; set; }
+        public string DepartmentName { get; set; }
         public int PassportId { get; set; }
     }
 }

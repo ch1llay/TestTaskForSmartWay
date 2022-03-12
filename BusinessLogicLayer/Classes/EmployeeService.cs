@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer.Mappers;
 using BusinessLogicLayer.Models;
 using DataAccessLayer.Classes;
 using DataAccessLayer.Interfaces;
@@ -14,7 +15,7 @@ namespace BusinessLogicLayer.Classes
         }
         public int Create(Employee employee)
         {
-            return _employeeDAL.Insert();
+            return _employeeDAL.Insert(employee.ToDbEmployee());
         }
     }
 }

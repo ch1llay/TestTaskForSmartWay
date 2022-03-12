@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Mappers
 {
-    internal class EmployeeMappers
+    public static class EmployeeMappers
     {
-        internal static DbEmployee ToDbEmployee(this Employee source)
+        public static DbEmployee ToDbEmployee(this Employee source)
         {
-            return source == null ? default : new DbEmployee
+            return new DbEmployee
             {
                 Id = source.Id,
-                PostId = source.PostId,
-                ParentId = source.ParentId,
-                Nickname = source.Nickname,
-                Message = source.Message
+                CompanyId = source.CompanyId,
+                DepartmentName = source.DepartmentName,
+                PassportId = source.PassportId,
+                Name = source.Name,
+                Surname = source.Surname,
+                Phone = source.Phone
             };
-        }
-        {
-
         }
     }
 }
+
