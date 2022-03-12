@@ -9,6 +9,6 @@ namespace BusinessLogicLayer.Interfaces
 {
     public interface IEmployeeService
     {
-        int Create(Employee employee);
+        int Create(Employee employee, Passport passport);
     }
 }

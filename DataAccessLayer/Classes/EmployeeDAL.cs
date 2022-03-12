@@ -27,11 +27,22 @@ namespace DataAccessLayer.Classes
             throw new NotImplementedException();
         }
 
+        public int InsertPassport(DbPassport passport)
+        {
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sqlQueryPassport = "INSERT INTO Passports (Type, Number) VALUES(@Name, @Number);SELECT CAST(SCOPE_IDENTITY() as int";
+                int passportId = connection.Query<int>(sqlQueryPassport, passport).FirstOrDefault();
+                return passportId;
+            }
+            
+        }
         public int Insert(DbEmployee employee)
         {
-            using(var connection = DBConnection.CreateConnection())
+            using (var connection = DBConnection.CreateConnection())
             {
-                var sqlQuery = "INSERT INTO Users (Name, Surname) VALUES(@Name, @Surname); SELECT CAST(SCOPE_IDENTITY() as int)";
+
+                var sqlQuery = "INSERT INTO Employees (Name, Surname, PassportId) VALUES(@Name, @Surname, @PassportId); SELECT CAST(SCOPE_IDENTITY() as int";
                 int userId = connection.Query<int>(sqlQuery, employee).FirstOrDefault();
                 return userId;
             }

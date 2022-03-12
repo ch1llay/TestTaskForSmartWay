@@ -10,6 +10,7 @@ namespace DataAccessLayer.Interfaces
     public interface IEmployeeDAL
     {
         int Insert (DbEmployee employee);
+        public int InsertPassport(DbPassport passport);
         bool Delete (int id);
         ICollection<DbEmployee> GetAllByCompanyId (int companyId);
         ICollection<DbEmployee> GetAllByDepartament (string departamentName);

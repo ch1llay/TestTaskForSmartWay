@@ -8,7 +8,7 @@ namespace BusinessLogicLayer.Models
 {
     public class Passport
     {
-        string Type { get; set; }
-        string Number { get; set; }
+        public string Type { get; set; }
+        public string Number { get; set; }
     }
 }
