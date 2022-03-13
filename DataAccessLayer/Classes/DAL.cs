@@ -128,7 +128,9 @@ namespace DataAccessLayer.Classes
 
 
 
-                var sql = $"Update public.\"Employees\" set \"Name\"='{employee.Name}', \"Surname\"= '{employee.Surname}', \"DepartmentName\" = '{employee.DepartmentName}' ,\"CompanyId\"='{employee.CompanyId}', \"Phone\" = '{employee.Phone}', \"PassportId\" = '{employee.PassportId}' where \"Id\" = '{entity.Id}' ";
+                var sql = $"Update public.\"Employees\" set \"Name\"='{employee.Name}', " +
+                    $"\"Surname\"= '{employee.Surname}', \"DepartmentName\" = '{employee.DepartmentName}' ," +
+                    $"\"CompanyId\"='{employee.CompanyId}', \"Phone\" = '{employee.Phone}', \"PassportId\" = '{employee.PassportId}' where \"Id\" = '{entity.Id}' ";
 
                 /*var sql = new StringBuilder($"update public.\"Employees\"  set ");
                 Type myType = typeof(DbEmployee);
