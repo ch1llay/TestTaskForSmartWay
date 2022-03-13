@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using DataAccessLayer.Models;
+using System.Reflection;
 
 namespace DataAccessLayer.Classes
 {
-    public class EmployeeDAL : IEmployeeDAL
+    public class DAL : IDAL
     {
-        public void Delete(int id)
+        public void Delete(int employeeId)
         {
             using (var connection = DBConnection.CreateConnection())
             {
@@ -27,7 +28,7 @@ namespace DataAccessLayer.Classes
             using (var connection = DBConnection.CreateConnection())
             {
                 var sql = $"SELECT * FROM public.\"Employees\" WHERE \"CompanyId\" = '{companyId}'";
-                var employees = connection.Query<DbEmployee>(sql);                
+                var employees = connection.Query<DbEmployee>(sql);
                 return employees;
             }
         }
@@ -66,9 +67,29 @@ namespace DataAccessLayer.Classes
             }
         }
 
-        public DbEmployee Update(DbEmployee entity)
+        public void Update(DbEmployee entity)
         {
-            throw new NotImplementedException();
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = new StringBuilder($"update public.\"Employees\"  set ");
+                Type myType = typeof(DbEmployee);
+                foreach (FieldInfo field in myType.GetFields())
+                {
+                    if (field.Name != "Id")
+                    {
+                        var value = myType.GetField(field.Name)?.GetValue(entity);
+                        if (value != null)
+                        {
+                            sql.Append($" \"{field.Name}\" = '{value}', ");
+                        }
+                    }
+                }
+                sql[sql.Length - 2] = ' ';
+                sql.Append("where \"Id\" = {entity.Id}");
+                connection.Execute(sql.ToString());
+            }
+            
+            
         }
 
 
@@ -79,7 +100,7 @@ namespace DataAccessLayer.Classes
                 var sql = $"SELECT * FROM public.\"Passports\" WHERE \"Id\" = '{id}'";
                 return connection.Query<DbPassport>(sql).FirstOrDefault();
             }
-    }
+        }
 
         public DbDepartament GetDepartmentByName(string name)
         {
@@ -90,3 +111,4 @@ namespace DataAccessLayer.Classes
             }
         }
     }
+}

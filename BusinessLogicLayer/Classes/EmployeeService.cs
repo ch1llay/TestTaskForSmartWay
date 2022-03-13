@@ -10,31 +10,37 @@ namespace BusinessLogicLayer.Classes
 
     public class EmployeeService : IEmployeeService
     {
-        IEmployeeDAL _employeeDAL;
-        public EmployeeService(IEmployeeDAL employeeDAL)
+        IDAL _DAL;
+        public EmployeeService(IDAL DAL)
         {
-            _employeeDAL = employeeDAL;
+            _DAL = DAL;
         }
         public int Create(Employee employee, Passport passport)
         {
-            employee.PassportId = _employeeDAL.InsertPassport(new DbPassport { Number = passport.Number, Type = passport.Type });
-            return _employeeDAL.Insert(employee.ToDbEmployee());
+            employee.PassportId = _DAL.InsertPassport(new DbPassport { Number = passport.Number, Type = passport.Type });
+            return _DAL.Insert(employee.ToDbEmployee());
+        }
+
+        public void Delete(int employeeId)
+        {
+            _DAL.Delete(employeeId);
         }
 
         public IEnumerable<Employee> GetAllByCompanyId(int companyId)
         {
-            return _employeeDAL.GetAllByCompanyId(companyId).Select(x => x.ToEmployee(
-                _employeeDAL.GetPassportById(x.PassportId).ToPassport(), _employeeDAL.GetDepartmentByName(x.DepartmentName).ToDepartament()
+            return _DAL.GetAllByCompanyId(companyId).Select(x => x.ToEmployee(
+                _DAL.GetPassportById(x.PassportId).ToPassport(), _DAL.GetDepartmentByName(x.DepartmentName).ToDepartament()
                 )
             );
         }
         public IEnumerable<Employee> GetAllByDepartamentName(string departamentName)
         {
-            return _employeeDAL.GetAllByDepartamentName(departamentName).Select(x => x.ToEmployee(
-                _employeeDAL.GetPassportById(x.PassportId).ToPassport(), _employeeDAL.GetDepartmentByName(x.DepartmentName).ToDepartament()
+            return _DAL.GetAllByDepartamentName(departamentName).Select(x => x.ToEmployee(
+                _DAL.GetPassportById(x.PassportId).ToPassport(), _DAL.GetDepartmentByName(x.DepartmentName).ToDepartament()
                 )
             );
         }
+
 
     }
 }

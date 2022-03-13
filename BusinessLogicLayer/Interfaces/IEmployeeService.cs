@@ -12,5 +12,6 @@ namespace BusinessLogicLayer.Interfaces
         int Create(Employee employee, Passport passport);
         IEnumerable<Employee> GetAllByCompanyId(int companyId);
         IEnumerable<Employee> GetAllByDepartamentName(string departamentName);
+        void Delete(int employeeId);
     }
 }

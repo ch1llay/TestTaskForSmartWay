@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IEmployeeDAL, EmployeeDAL>();
+builder.Services.AddScoped<IDAL, DAL>();
 
 
 var app = builder.Build();
