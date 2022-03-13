@@ -25,6 +25,37 @@ namespace BusinessLogicLayer.Mappers
                 Phone = source.Phone
             };
         }
+        public static Passport ToPassport(this DbPassport source)
+        {
+            return new Passport
+            {
+                Number = source.Number,
+                Type = source.Type
+            };
+        }
+        public static Departament ToDepartament(this DbDepartament source)
+        {
+            return new Departament
+            {
+                Name = source.Name,
+                Phone = source.Phone
+            };
+        }
+        public static Employee ToEmployee(this DbEmployee source, Passport passport=null, Departament departament=null)
+        {
+            return new Employee
+            {
+                Id = source.Id,
+                CompanyId = source.CompanyId,
+                DepartmentName = source.DepartmentName,
+                PassportId = source.PassportId,
+                Name = source.Name,
+                Surname = source.Surname,
+                Phone = source.Phone,
+                Passport = passport,
+                Department = departament
+            };
+        }
     }
 }
 

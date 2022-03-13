@@ -8,8 +8,8 @@ namespace BusinessLogicLayer.Models
 {
     public class Departament
     {
-        string Name { get; set; }
-        string Phone { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
 
     }
 }

@@ -26,7 +26,16 @@ namespace TestTaskForSmartWay.Controllers
 
             return Ok(_employeeService.Create(employee.ToEmployee(), employee.Passport));
         }
-            
+
+        [HttpGet]
+        [Route("api/v1/employee/")]
+        public IActionResult GetAllByCompanyId([FromQuery] int companyId)
+        {
+
+            return Ok(_employeeService.GetAllByCompanyId(companyId));
+        }
+
+
         [Route("/")]
         public IActionResult Index()
         {

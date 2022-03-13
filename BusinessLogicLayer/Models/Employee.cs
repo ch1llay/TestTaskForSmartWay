@@ -15,6 +15,8 @@ namespace BusinessLogicLayer.Models
         public int CompanyId { get; set; }
         public string DepartmentName { get; set; }
         public int PassportId { get; set; }
+        public Departament Department { get; set; }
+        public Passport Passport { get; set; }
 
 
     }

@@ -12,20 +12,34 @@ namespace DataAccessLayer.Classes
 {
     public class EmployeeDAL : IEmployeeDAL
     {
-        public bool Delete(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = "DELETE FROM public.\"Employees\" WHERE \"Id\" = '1'";
+                connection.Execute(sql);
+            }
         }
 
 
-        public ICollection<DbEmployee> GetAllByCompanyId(int companyId)
+        public IEnumerable<DbEmployee> GetAllByCompanyId(int companyId)
         {
-            throw new NotImplementedException();
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = $"SELECT * FROM public.\"Employees\" WHERE \"CompanyId\" = '{companyId}'";
+                var employees = connection.Query<DbEmployee>(sql);                
+                return employees;
+            }
         }
 
-        public ICollection<DbEmployee> GetAllByDepartament(string departamentName)
+        public IEnumerable<DbEmployee> GetAllByDepartamentName(string departamentName)
         {
-            throw new NotImplementedException();
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = $"SELECT * FROM public.\"Employees\" WHERE \"DepartamentName\" = '{departamentName}'";
+                var employees = connection.Query<DbEmployee>(sql);
+                return employees;
+            }
         }
 
         public int InsertPassport(DbPassport passport)
@@ -36,7 +50,7 @@ namespace DataAccessLayer.Classes
                 int passportId = connection.Query<int>(sqlQueryAddPassport).FirstOrDefault();
                 return passportId;
             }
-            
+
         }
         public int Insert(DbEmployee employee)
         {
@@ -56,5 +70,23 @@ namespace DataAccessLayer.Classes
         {
             throw new NotImplementedException();
         }
+
+
+        public DbPassport GetPassportById(int id)
+        {
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = $"SELECT * FROM public.\"Passports\" WHERE \"Id\" = '{id}'";
+                return connection.Query<DbPassport>(sql).FirstOrDefault();
+            }
     }
-}
+
+        public DbDepartament GetDepartmentByName(string name)
+        {
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = $"SELECT * FROM public.\"Departments\" WHERE \"Name\" = '{name}'";
+                return connection.Query<DbDepartament>(sql).FirstOrDefault();
+            }
+        }
+    }

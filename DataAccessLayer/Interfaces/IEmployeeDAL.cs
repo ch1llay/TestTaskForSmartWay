@@ -11,9 +11,11 @@ namespace DataAccessLayer.Interfaces
     {
         int Insert (DbEmployee employee);
         public int InsertPassport(DbPassport passport);
-        bool Delete (int id);
-        ICollection<DbEmployee> GetAllByCompanyId (int companyId);
-        ICollection<DbEmployee> GetAllByDepartament (string departamentName);
+        public DbPassport GetPassportById(int id);
+        public DbDepartament GetDepartmentByName(string name);
+        void Delete (int id);
+        IEnumerable<DbEmployee> GetAllByCompanyId (int companyId);
+        IEnumerable<DbEmployee> GetAllByDepartamentName (string departamentName);
         DbEmployee Update (DbEmployee entity);
 
 

@@ -10,5 +10,10 @@ namespace DataAccessLayer.Models
     {
         public string Type { get; set; }
         public string Number { get; set; }
+
+        public global::BusinessLogicLayer.Models.Passport ToPassport()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

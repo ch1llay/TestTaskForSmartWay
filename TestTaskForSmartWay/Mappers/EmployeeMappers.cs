@@ -24,6 +24,8 @@ namespace TestTaskForSmartWay.Mappers
                 Phone = source.Phone
             };
         }
+        
+
     }
 }
 

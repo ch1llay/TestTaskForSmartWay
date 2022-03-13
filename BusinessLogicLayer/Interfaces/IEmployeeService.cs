@@ -10,5 +10,7 @@ namespace BusinessLogicLayer.Interfaces
     public interface IEmployeeService
     {
         int Create(Employee employee, Passport passport);
+        IEnumerable<Employee> GetAllByCompanyId(int companyId);
+        IEnumerable<Employee> GetAllByDepartamentName(string departamentName);
     }
 }

@@ -20,5 +20,21 @@ namespace BusinessLogicLayer.Classes
             employee.PassportId = _employeeDAL.InsertPassport(new DbPassport { Number = passport.Number, Type = passport.Type });
             return _employeeDAL.Insert(employee.ToDbEmployee());
         }
+
+        public IEnumerable<Employee> GetAllByCompanyId(int companyId)
+        {
+            return _employeeDAL.GetAllByCompanyId(companyId).Select(x => x.ToEmployee(
+                _employeeDAL.GetPassportById(x.PassportId).ToPassport(), _employeeDAL.GetDepartmentByName(x.DepartmentName).ToDepartament()
+                )
+            );
+        }
+        public IEnumerable<Employee> GetAllByDepartamentName(string departamentName)
+        {
+            return _employeeDAL.GetAllByDepartamentName(departamentName).Select(x => x.ToEmployee(
+                _employeeDAL.GetPassportById(x.PassportId).ToPassport(), _employeeDAL.GetDepartmentByName(x.DepartmentName).ToDepartament()
+                )
+            );
+        }
+
     }
 }
