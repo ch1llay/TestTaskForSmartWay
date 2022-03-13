@@ -12,8 +12,8 @@ alter table "Departments"
 create table "Passports"
 (
     "Type"   text,
-    "Number" text    not null,
-    "Id"     integer not null
+    "Number" text not null,
+    "Id"     serial
         constraint passports_pk
             primary key
 );
@@ -21,9 +21,12 @@ create table "Passports"
 alter table "Passports"
     owner to postgres;
 
+create unique index passports_id_uindex
+    on "Passports" ("Id");
+
 create table "Employees"
 (
-    "Id"             integer not null
+    "Id"             serial
         constraint employee_pk
             primary key,
     "Name"           varchar(50),
@@ -41,5 +44,3 @@ create table "Employees"
 alter table "Employees"
     owner to postgres;
 
-create unique index passports_id_uindex
-    on "Passports" ("Id");
