@@ -79,22 +79,19 @@ namespace DataAccessLayer.Classes
         {
             using (var connection = DBConnection.CreateConnection())
             {
-                var sql = new StringBuilder($"update public.\"Employees\"  set ");
-                Type myType = typeof(DbPassport);
-                foreach (FieldInfo field in myType.GetFields())
+
+                DbPassport passport = GetPassportById(entity.Id);
+                if (entity.Type != default && entity.Type != passport.Type)
                 {
-                    if (field.Name != "Id")
-                    {
-                        var value = myType.GetField(field.Name)?.GetValue(entity);
-                        if (value != default)
-                        {
-                            sql.Append($" \"{field.Name}\" = '{value}', ");
-                        }
-                    }
+                    passport.Type = entity.Type;
                 }
-                sql[sql.Length - 2] = ' ';
-                sql.Append("where \"Id\" = {entity.Id}");
-                connection.Execute(sql.ToString());
+                if (entity.Number != default && entity.Number != passport.Number)
+                {
+                    passport.Number = entity.Number;
+                }
+                var sql = $"Update public.\"Passports\" set \"Type\"='{passport.Type}', " +
+                    $"\"Number\"= '{passport.Number}' where \"Id\" = '{entity.Id}' ";
+                connection.Execute(sql);
             }
 
 

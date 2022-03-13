@@ -37,7 +37,7 @@ namespace TestTaskForSmartWay.Controllers
         public IActionResult Update([FromRoute] int id, [FromBody] RequestUpdateEmployee employee)
         {
             _employeeService.Update(id, employee.ToEmployee());
-            return Ok(employee.Name);
+            return Ok(employee.Passport);
         }
 
         [HttpGet]

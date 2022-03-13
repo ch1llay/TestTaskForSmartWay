@@ -45,7 +45,11 @@ namespace BusinessLogicLayer.Classes
         {
             employee.Id = id;
             _DAL.Update(employee.ToDbEmployee());
-            _DAL.UpdatePassport(employee.Passport.ToDbPassport());
+            if (employee.Passport != null)
+            {
+                employee.Passport.Id = _DAL.GetById(employee.Id).PassportId;
+                _DAL.UpdatePassport(employee.Passport.ToDbPassport());
+            }
         }
     }
 }

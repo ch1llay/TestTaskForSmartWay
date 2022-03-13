@@ -37,6 +37,7 @@ namespace BusinessLogicLayer.Mappers
         {
             return source != null ? new DbPassport
             {
+                Id = source.Id,
                 Number = source.Number,
                 Type = source.Type
             } : null ;

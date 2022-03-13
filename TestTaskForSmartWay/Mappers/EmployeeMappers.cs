@@ -33,7 +33,8 @@ namespace TestTaskForSmartWay.Mappers
                 DepartmentName = source.DepartmentName ?? default,
                 Name = source.Name ?? default,
                 Surname = source.Surname ?? default,
-                Phone = source.Phone ?? default
+                Phone = source.Phone ?? default,
+                Passport = source.Passport ?? default,
             };
         }
         public static EmployeeResponse ToResponse(this Employee source)
