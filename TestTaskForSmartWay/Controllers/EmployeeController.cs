@@ -33,22 +33,22 @@ namespace TestTaskForSmartWay.Controllers
 
 
         [HttpPut]
-        [Route("api/v1/employee/")]
-        public IActionResult Update([FromBody] RequestCreateEmployee employee)
+        [Route("api/v1/employee/{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] RequestUpdateEmployee employee)
         {
-
-            return Ok(_employeeService.Update(employee.ToEmployee(), employee.Passport));
+            _employeeService.Update(id, employee.ToEmployee());
+            return Ok(employee.Name);
         }
 
         [HttpGet]
-        [Route("api/v1/employee/")]
+        [Route("api/v1/employee/getByCompanyId")]
         public IActionResult GetAllByCompanyId([FromQuery] int companyId)
         {
 
             return Ok(_employeeService.GetAllByCompanyId(companyId));
         }
         [HttpGet]
-        [Route("api/v1/employee/")]
+        [Route("api/v1/employee/getByDepartmentName")]
         public IActionResult GetAllByDepartmentName([FromQuery] string departmentName)
         {
 

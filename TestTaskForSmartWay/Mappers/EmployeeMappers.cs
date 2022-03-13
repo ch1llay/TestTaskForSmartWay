@@ -24,6 +24,18 @@ namespace TestTaskForSmartWay.Mappers
                 Phone = source.Phone
             };
         }
+
+        public static Employee ToEmployee(this RequestUpdateEmployee source)
+        {
+            return new Employee
+            {
+                CompanyId = source.CompanyId ?? default,
+                DepartmentName = source.DepartmentName ?? default,
+                Name = source.Name ?? default,
+                Surname = source.Surname ?? default,
+                Phone = source.Phone ?? default
+            };
+        }
         public static EmployeeResponse ToResponse(this Employee source)
         {
             return new EmployeeResponse

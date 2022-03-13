@@ -17,12 +17,20 @@ namespace DataAccessLayer.Classes
         {
             using (var connection = DBConnection.CreateConnection())
             {
-                var sql = "DELETE FROM public.\"Employees\" WHERE \"Id\" = '1'";
+                var sql = $"DELETE FROM public.\"Employees\" WHERE \"Id\" = '{employeeId}'";
                 connection.Execute(sql);
             }
         }
 
-
+        public DbEmployee GetById(int employeeId)
+        {
+            using (var connection = DBConnection.CreateConnection())
+            {
+                var sql = $"SELECT * FROM public.\"Employees\" WHERE \"Id\" = '{employeeId}'";
+                var employee = connection.Query<DbEmployee>(sql).Single();
+                return employee;
+            }
+        }
         public IEnumerable<DbEmployee> GetAllByCompanyId(int companyId)
         {
             using (var connection = DBConnection.CreateConnection())
@@ -37,7 +45,7 @@ namespace DataAccessLayer.Classes
         {
             using (var connection = DBConnection.CreateConnection())
             {
-                var sql = $"SELECT * FROM public.\"Employees\" WHERE \"DepartamentName\" = '{departamentName}'";
+                var sql = $"SELECT * FROM public.\"Employees\" WHERE \"DepartmentName\" = '{departamentName}'";
                 var employees = connection.Query<DbEmployee>(sql);
                 return employees;
             }
@@ -95,13 +103,40 @@ namespace DataAccessLayer.Classes
         {
             using (var connection = DBConnection.CreateConnection())
             {
-                var sql = new StringBuilder($"update public.\"Employees\"  set ");
+                DbEmployee employee = GetById(entity.Id);
+                if(entity.PassportId != default && entity.PassportId != employee.PassportId)
+                {
+                    employee.PassportId = entity.PassportId;
+                }
+                if (entity.Name != default && entity.Name != employee.Name)
+                {
+                    employee.Name = entity.Name;
+                }
+                if (entity.Surname != default && entity.Surname != employee.Surname)
+                {
+                    employee.Surname = entity.Surname;
+                }
+                if (entity.DepartmentName != default && entity.DepartmentName != employee.DepartmentName)
+                {
+                    employee.DepartmentName = entity.DepartmentName;
+                }
+                if (entity.Phone != default && entity.Phone != employee.Phone)
+                {
+                    employee.Phone = entity.Phone;
+                }
+
+
+
+
+                var sql = $"Update public.\"Employees\" set \"Name\"='{employee.Name}', \"Surname\"= '{employee.Surname}', \"DepartmentName\" = '{employee.DepartmentName}' ,\"CompanyId\"='{employee.CompanyId}', \"Phone\" = '{employee.Phone}', \"PassportId\" = '{employee.PassportId}' where \"Id\" = '{entity.Id}' ";
+
+                /*var sql = new StringBuilder($"update public.\"Employees\"  set ");
                 Type myType = typeof(DbEmployee);
-                foreach (FieldInfo field in myType.GetFields())
+                foreach (FieldInfo field in myType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static))
                 {
                     if (field.Name != "Id")
                     {
-                        var value = myType.GetField(field.Name)?.GetValue(entity);
+                        var value = myType.GetField("Name")?.GetValue(entity);
                         if (value != default)
                         {
                             sql.Append($" \"{field.Name}\" = '{value}', ");
@@ -109,8 +144,8 @@ namespace DataAccessLayer.Classes
                     }
                 }
                 sql[sql.Length - 2] = ' ';
-                sql.Append("where \"Id\" = {entity.Id}");
-                connection.Execute(sql.ToString());
+                sql.Append("where \"Id\" = {entity.Id}");*/
+                connection.Execute(sql);
             }
             
             

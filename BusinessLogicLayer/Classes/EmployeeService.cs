@@ -41,8 +41,9 @@ namespace BusinessLogicLayer.Classes
             );
         }
 
-        public void Update(Employee employee)
+        public void Update(int id, Employee employee)
         {
+            employee.Id = id;
             _DAL.Update(employee.ToDbEmployee());
             _DAL.UpdatePassport(employee.Passport.ToDbPassport());
         }
