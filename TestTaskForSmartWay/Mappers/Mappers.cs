@@ -11,7 +11,7 @@ using TestTaskForSmartWay.Models;
 
 namespace TestTaskForSmartWay.Mappers
 {
-    public static class EmployeeMappers
+    public static class Mappers
     {
         public static Employee ToEmployee(this RequestCreateEmployee source)
         {

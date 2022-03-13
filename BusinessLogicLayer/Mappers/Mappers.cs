@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Mappers
 {
-    public static class EmployeeMappers
+    public static class Mappers
     {
         public static DbEmployee ToDbEmployee(this Employee source)
         {
