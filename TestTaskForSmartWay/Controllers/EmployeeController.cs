@@ -14,17 +14,30 @@ namespace TestTaskForSmartWay.Controllers
         {
             _employeeService = employeeService;
         }
-        [Route("api/v1/employee/{id}")]
-        public IActionResult Echo(int id)
-        {
-            return Ok(id);
-        }
         [HttpPost]
-        [Route("api/v1/employee/create")]
+        [Route("api/v1/employee/")]
         public IActionResult Create([FromBody] RequestCreateEmployee employee)
         {
 
             return Ok(_employeeService.Create(employee.ToEmployee(), employee.Passport));
+        }
+
+        [HttpDelete]
+        [Route("api/v1/employee/")]
+        public IActionResult Delete([FromQuery] int employeeId)
+        {
+            _employeeService.Delete(employeeId);
+
+            return Ok();
+        }
+
+
+        [HttpPut]
+        [Route("api/v1/employee/")]
+        public IActionResult Update([FromBody] RequestCreateEmployee employee)
+        {
+
+            return Ok(_employeeService.Update(employee.ToEmployee(), employee.Passport));
         }
 
         [HttpGet]
@@ -34,6 +47,15 @@ namespace TestTaskForSmartWay.Controllers
 
             return Ok(_employeeService.GetAllByCompanyId(companyId));
         }
+        [HttpGet]
+        [Route("api/v1/employee/")]
+        public IActionResult GetAllByDepartmentName([FromQuery] string departmentName)
+        {
+
+            return Ok(_employeeService.GetAllByDepartamentName(departmentName));
+        }
+
+
 
 
         [Route("/")]

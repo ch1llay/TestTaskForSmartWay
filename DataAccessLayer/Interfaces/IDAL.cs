@@ -17,6 +17,7 @@ namespace DataAccessLayer.Interfaces
         IEnumerable<DbEmployee> GetAllByCompanyId (int companyId);
         IEnumerable<DbEmployee> GetAllByDepartamentName (string departamentName);
         void Update (DbEmployee entity);
+        void UpdatePassport(DbPassport entity);
 
 
 

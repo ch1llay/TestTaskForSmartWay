@@ -13,5 +13,6 @@ namespace BusinessLogicLayer.Interfaces
         IEnumerable<Employee> GetAllByCompanyId(int companyId);
         IEnumerable<Employee> GetAllByDepartamentName(string departamentName);
         void Delete(int employeeId);
+        void Update(Employee employee);
     }
 }

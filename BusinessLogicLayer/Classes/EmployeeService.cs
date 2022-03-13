@@ -41,6 +41,10 @@ namespace BusinessLogicLayer.Classes
             );
         }
 
-
+        public void Update(Employee employee)
+        {
+            _DAL.Update(employee.ToDbEmployee());
+            _DAL.UpdatePassport(employee.Passport.ToDbPassport());
+        }
     }
 }

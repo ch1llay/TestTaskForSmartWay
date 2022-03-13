@@ -33,6 +33,14 @@ namespace BusinessLogicLayer.Mappers
                 Type = source.Type
             };
         }
+        public static DbPassport ToDbPassport(this Passport source)
+        {
+            return new DbPassport
+            {
+                Number = source.Number,
+                Type = source.Type
+            };
+        }
         public static Departament ToDepartament(this DbDepartament source)
         {
             return new Departament
